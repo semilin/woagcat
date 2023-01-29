@@ -1,11 +1,10 @@
-#include <stdbool.h>
 #include "layout.h"
 
-bool is_sfr(Pos a, Pos b) {
-  return a == b;
+float is_sfr(Pos bs[3]) {
+  return bs[0] == bs[1];
 }
 
-bool is_sfb(Pos a, Pos b) {
-  return !is_sfr(a, b) &&
-    pos_finger(a) == pos_finger(b);
+float is_sfb(Pos bs[3]) {
+  return !is_sfr(bs) &&
+    pos_finger(bs[0]) == pos_finger(bs[1]);
 }

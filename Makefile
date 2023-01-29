@@ -4,9 +4,8 @@ CFLAGS= -std=c17 -Wall -Wextra -Wpedantic -Werror -Og -g
 CLINKS= -lm
 TESTLINKS= -lcheck -lsubunit -lrt -lpthread
 SRCMAIN= src/main.c
-SRCFILES= src/corpus.c src/layout.c
+SRCFILES= src/corpus.c src/layout.c src/metrics.c src/analysis.c
 TESTFILES= tests/check_woagcat.c
-OBJFILES= $(patsubst %.c, %.o, $(SRCFILES))
 
 .PHONY: all check clean
 
@@ -17,4 +16,4 @@ check: $(SRCFILES) $(TESTFILES)
 	cc $(CFLAGS) $(SRCFILES) $(TESTFILES) -o check $(CLINKS) $(TESTLINKS)
 	./check
 clean:
-	$(RM) $(OBJFILES) *~
+	$(RM) -v woagcat check

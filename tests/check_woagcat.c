@@ -1,7 +1,10 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include <check.h>
 #include "../src/layout.h"
 #include "../src/corpus.h"
+#include "../src/metrics.h"
+#include "../src/analysis.h"
 
 START_TEST(test_pos_finger) {
   ck_assert(pos_finger(0) == LP);
@@ -75,6 +78,20 @@ START_TEST(test_trigram_to_index) {
   ck_assert(trigram_to_index('b', 'a', 'a') == 961);
 } END_TEST
 
+START_TEST(test_classify_metric) {
+  const Metric m = {
+    "sfb",
+    Bigram,
+    is_sfb
+  };
+  MetricAmountList* list = classify_metric(&m);
+  ck_assert(list->nstrokes==96);
+  
+  for (uint32_t i=0; i<list->nstrokes; i++) {
+    ck_assert(list->amounts[i].amount != 0);
+  }
+} END_TEST
+
 Suite * woagcat_suite(void) {
   Suite *s;
   TCase *tc_core;
@@ -92,6 +109,7 @@ Suite * woagcat_suite(void) {
   tcase_add_test(tc_core, test_char_to_index);
   tcase_add_test(tc_core, test_bigram_to_index);
   tcase_add_test(tc_core, test_trigram_to_index);
+  tcase_add_test(tc_core, test_classify_metric);
   suite_add_tcase(s, tc_core);
 
   return s;
