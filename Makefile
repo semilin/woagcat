@@ -1,7 +1,7 @@
 CC= gcc
 RM= rm -vf
 CFLAGS= -std=c17 -Wall -Wextra -Wpedantic -Werror -Og -g -gdwarf-4
-CLINKS= -lm
+CLINKS= -lm -lreadline
 TESTLINKS= -lcheck -lrt -lpthread
 SRCMAIN= src/main.c
 SRCFILES= src/corpus.c src/layout.c src/metrics.c src/analysis.c
