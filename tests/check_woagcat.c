@@ -92,6 +92,10 @@ START_TEST(test_classify_metric) {
   }
 } END_TEST
 
+START_TEST(test_classify_all_metrics) {
+  classify_all_metrics();
+} END_TEST
+
 Suite * woagcat_suite(void) {
   Suite *s;
   TCase *tc_core;
@@ -110,6 +114,7 @@ Suite * woagcat_suite(void) {
   tcase_add_test(tc_core, test_bigram_to_index);
   tcase_add_test(tc_core, test_trigram_to_index);
   tcase_add_test(tc_core, test_classify_metric);
+  tcase_add_test(tc_core, test_classify_all_metrics);
   suite_add_tcase(s, tc_core);
 
   return s;

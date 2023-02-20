@@ -1,5 +1,6 @@
 #pragma once
 #include <stdint.h>
+#include "corpus.h"
 typedef int8_t Layout[30];
 typedef int8_t Pos;
 enum Finger {
@@ -10,7 +11,9 @@ enum Finger {
 typedef enum Finger Finger;
 extern const Finger FINGER_MAP[30];
 
-void print_layout(Layout l);
+Layout* str_to_layout(char* str);
+void print_layout(Layout* l);
+uint32_t layout_freq_total(Layout* l, Corpus* corpus);
 Finger pos_finger(Pos p);
 
 uint8_t pos_x(Pos p);
