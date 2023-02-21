@@ -73,4 +73,10 @@ void run_command(const Command *cmd, char *tokens[]) {
     }
   }
   cmd->fn(vals);
+  for (size_t i = 0; i < cmd->argc; i++) {
+    switch (cmd->args[i]) {
+    case LayoutArg:
+      free(vals[i].LayoutVal);
+    }
+  }
 }

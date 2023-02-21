@@ -14,15 +14,12 @@
 Corpus corpus;
 
 int main(void) {
-  mcheck(0);
-
   Config config;
   config.corpus_path = NULL;
   if (ini_parse("config.ini", handler, &config) < 0) {
     output_error("can't load `config.ini`.");
     return 1;
   }
-  mcheck(0);
 
   if (read_file_corpus(&corpus, config.corpus_path)) {
     output_error("couldn't load file `%s`. Please edit your `config.ini`", config.corpus_path);

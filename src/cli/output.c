@@ -25,7 +25,7 @@ void output_command_help(const Command* cmd) {
   printf("\t");
   output_usage(cmd);
   if (cmd->alias_count) {
-    printf("\t%sAliases%s: ", AC_BLUE, AC_NORMAL);
+    printf("\t%sAliases%s: ", AC_YELLOW, AC_NORMAL);
     for (size_t a=0;a<cmd->alias_count;a++) {
       printf("%s ", cmd->aliases[a]);
     }
