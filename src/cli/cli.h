@@ -19,6 +19,7 @@ typedef union {
 
 typedef struct {
   char* name;
+  char* description;
   char* usage;
   char* aliases[3];
   size_t alias_count;
@@ -32,6 +33,7 @@ const Command* get_command(char* name);
 void run_command(const Command* cmd, char* tokens[]);
 
 void output_error(char* fmt, ...);
+void output_command_help(const Command* cmd);
 void output_usage(const Command* cmd);
 
 void analyze_layout(Layout* l);
