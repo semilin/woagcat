@@ -3,7 +3,7 @@ RM= rm -vf
 CFLAGS= -std=c17 -Wall -Wextra -Wpedantic -Werror -Og -g -gdwarf-4
 CLINKS= -lm -lreadline
 TESTLINKS= -lcheck -lrt -lpthread
-SRCMAIN= src/main.c
+SRCMAIN= src/cli/main.c
 SRCFILES= src/corpus.c src/layout.c src/metrics.c src/analysis.c
 TESTFILES= tests/check_woagcat.c
 

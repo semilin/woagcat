@@ -78,6 +78,7 @@ void classify_all_metrics(void) {
 float layout_metric_stats(Layout *l, MetricAmountList *metric_amount_list,
                           Corpus *corpus) {
   const NgramType ngram_type = metric_amount_list->metric->ngram_type;
+  const int8_t *m = l->matrix;
   float total = 0;
   for (uint32_t i = 0; i < metric_amount_list->nstrokes; i++) {
     const MetricAmount *amount = &metric_amount_list->amounts[i];
@@ -87,18 +88,18 @@ float layout_metric_stats(Layout *l, MetricAmountList *metric_amount_list,
 
     switch (ngram_type) {
     case Char:
-      freq = corpus->chars[*l[ns[0]]];
+      freq = corpus->chars[m[ns[0]]];
       break;
     case Bigram:
-      freq = corpus->bigrams[(SL * *l[ns[0]]) + *l[ns[1]]];
+      freq = corpus->bigrams[(SL * m[ns[0]]) + m[ns[1]]];
       break;
     case Skipgram:
-      freq = corpus->skipgrams[(SL * *l[ns[0]]) + *l[ns[1]]];
+      freq = corpus->skipgrams[(SL * m[ns[0]]) + m[ns[1]]];
       break;
     case Trigram:
       freq =
           corpus
-              ->trigrams[(SL * SL * *l[ns[0]]) + (SL * *l[ns[1]]) + *l[ns[2]]];
+              ->trigrams[(SL * SL * m[ns[0]]) + (SL * m[ns[1]]) + m[ns[2]]];
       break;
     }
     total += (float)freq * amount->amount;

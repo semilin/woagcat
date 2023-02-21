@@ -11,18 +11,6 @@ const Finger FINGER_MAP[30] =
    LP, LR, LM, LI, LI, RI, RI, RM, RR, RP,
    LP, LR, LM, LI, LI, RI, RI, RM, RR, RP,};
 
-Layout* str_to_layout(char* str) {
-  Layout* l = malloc(30*sizeof(*l));
-  memset(l, -1, 30*sizeof(*l));
-  for(int i=0;i<30;i++) {
-    if (str[i] == '\0') {
-      break;
-    }
-    *l[i] = char_to_index(str[i]);
-  }
-  return l;
-}
-
 void print_layout(Layout* l) {
   for (int i=0;i<30;i++) {
     if (i != 0 && i % 5 == 0) {
@@ -32,7 +20,7 @@ void print_layout(Layout* l) {
 	printf(" ");
       }
     }
-    printf("%c ", SYMBOLS[*l[i]]);
+    printf("%c ", SYMBOLS[l->matrix[i]]);
   }
   printf("\n");
 }
@@ -40,7 +28,7 @@ void print_layout(Layout* l) {
 uint32_t layout_freq_total(Layout* l, Corpus* corpus) {
   uint32_t total = 0;
   for (int i=0;i<30;i++) {
-    total += corpus->chars[*l[i]];
+    total += corpus->chars[l->matrix[i]];
   }
   return total;
 }
