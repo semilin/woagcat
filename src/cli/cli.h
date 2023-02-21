@@ -15,6 +15,8 @@ typedef union {
 typedef struct {
   char* name;
   char* usage;
+  char* aliases[3];
+  size_t alias_count;
   Argument args[5];
   size_t argc;
   void (*fn)(ArgVal*);

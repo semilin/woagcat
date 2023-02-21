@@ -15,6 +15,11 @@ void output_error(char* fmt, ...) {
   printf("\n");
 }
 
+/* void output_key_pair(char* key, float value) { */
+  
+/* } */
+
 void output_usage(const Command* cmd) {
   printf("%sUsage%s: %s\n", AC_YELLOW, AC_NORMAL, cmd->usage);
 }
+

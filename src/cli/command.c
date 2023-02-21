@@ -1,8 +1,8 @@
 #include "../layout.h"
+#include "cli.h"
 #include "stdio.h"
 #include "stdlib.h"
 #include "string.h"
-#include "cli.h"
 
 Layout *get_layout(char *layout_name) {
   char full_path[50];
@@ -40,29 +40,33 @@ Layout *get_layout(char *layout_name) {
   return l;
 }
 
-const Command* get_command(char* name) {
-  for (size_t i=0;i<NUM_COMMANDS;i++) {
+const Command *get_command(char *name) {
+  for (size_t i = 0; i < NUM_COMMANDS; i++) {
     if (strcmp(COMMANDS[i].name, name) == 0)
       return &COMMANDS[i];
+    for (size_t a = 0; a<COMMANDS[i].alias_count; a++) {
+      if (strcmp(COMMANDS[i].aliases[a], name) == 0)
+	return &COMMANDS[i];
+    }
   }
   return NULL;
 }
 
-void run_command(const Command* cmd, char* tokens[]) {
+void run_command(const Command *cmd, char *tokens[]) {
   ArgVal vals[5];
-  for(size_t i=0;i<cmd->argc;i++) {
-    char* token = tokens[i+1];
-    switch(cmd->args[i]) {
+  for (size_t i = 0; i < cmd->argc; i++) {
+    char *token = tokens[i + 1];
+    switch (cmd->args[i]) {
     case LayoutArg:
       if (!token) {
-	output_error("command `%s` missing a LAYOUT arg.", cmd->name);
-	output_usage(cmd);
-	return;
+        output_error("command `%s` missing a LAYOUT arg.", cmd->name);
+        output_usage(cmd);
+        return;
       }
-      Layout* layout = get_layout(token);
+      Layout *layout = get_layout(token);
       if (!layout) {
-	output_error("layout `%s` not found.", token);
-	return;
+        output_error("layout `%s` not found.", token);
+        return;
       }
       vals[i].LayoutVal = get_layout(token);
       break;
