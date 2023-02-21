@@ -4,6 +4,11 @@
 
 extern Corpus corpus;
 
+typedef struct {
+  char* corpus_path;
+} Config;
+int handler(void* main, const char* section, const char* name, const char* value);
+
 typedef enum {
   LayoutArg,
 } Argument;

@@ -60,7 +60,7 @@ int trigram_to_index(char a, char b, char c) {
   return (SYMBOLS_LENGTH * SYMBOLS_LENGTH * a_idx) + bg_idx;
 }
 
-void read_file_corpus(Corpus* corpus, char* path) {
+int read_file_corpus(Corpus* corpus, char* path) {
   const int BUFFER_SIZE = 255;
   FILE* file;
   char buff[BUFFER_SIZE];
@@ -69,8 +69,7 @@ void read_file_corpus(Corpus* corpus, char* path) {
 
   file = fopen(path, "r");
   if (!file) {
-    printf("File %s does not exist.\n", path);
-    return;
+    return 1;
   }
 
   while (1) {
@@ -103,4 +102,5 @@ void read_file_corpus(Corpus* corpus, char* path) {
   }
   
   fclose(file);
+  return 0;
 }
